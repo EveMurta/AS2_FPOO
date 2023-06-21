@@ -1,14 +1,14 @@
 package PetStore;
 
-public class Cao extends Mamifero {
+public class Gato extends Mamifero {
 
 	private static final long serialVersionUID = 1L;
 
 	public String soar() {
-		return "Faz latidos";
+		return "Faz Miados";
 	}
-	public Cao(String nome, int idade, String dono) {
+	public Gato(String nome, int idade, String dono) {
 		super(nome, idade, dono);
-		this.especie = "Cachorro";
+		this.especie = "Gato";
 	}
 }
