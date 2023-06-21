@@ -1,4 +1,4 @@
-package PetStore;
+package Produto;
 
 import java.io.EOFException;
 import java.io.FileInputStream;

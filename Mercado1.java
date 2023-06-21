@@ -1,4 +1,4 @@
-package PetStore;
+package Produto;
 
 import java.io.EOFException;
 import java.io.FileInputStream;
@@ -9,45 +9,45 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-public class PetStore1 {
+public class Mercado1 {
 
-	private ArrayList<Mamifero> mamiferos;
+	private ArrayList<Produtos> produtos;
 
 
-	public PetStore1( ) {
-		this.mamiferos = new ArrayList<Mamifero>();
+	public Mercado1() {
+		this.produtos = new ArrayList<Produtos>();
 	}
 
-	public void adicionaAnimal(Mamifero mani) {
-		this.mamiferos.add(mani);
+	public void adicionaAnimal(Produto prod) {
+		this.produtos.add(prod);
 	}
 
-	public void listarAnimais() {
-		for(Mamifero mani:mamiferos) {
-			System.out.println(mani.toString());
+	public void listarProdutos() {
+		for(Produto prod:produtos) {
+			System.out.println(prod.toString());
 		}
 		System.out.println("Total = " + this.mamiferos.size() + " animais listados com sucesso!\n");
 	}
 	
-	public void excluirAnimal(Mamifero mani) {
-		if (this.mamiferos.contains(mani)) {
-			this.mamiferos.remove(mani);
-			System.out.println("[Animal " + mani.toString() + "excluido com sucesso!]\n");
+	public void excluirProdutos(Produto prod) {
+		if (this.produtos.contains(prod)) {
+			this.produtos.remove(prod);
+			System.out.println("[Produto " + prod.toString() + "excluido com sucesso!]\n");
 		}
 		else
-			System.out.println("Animal inexistente!\n");
+			System.out.println("Produto inexistente!\n");
 	}
 
-	public void excluirAnimais() {
-		mamiferos.clear();
-		System.out.println("Animais excluidos com sucesso!\n");
+	public void excluirProdutos() {
+		produtos.clear();
+		System.out.println("Produtos excluidos com sucesso!\n");
 	}
-	public void gravarAnimais()  {
+	public void gravarProdutos()  {
 		ObjectOutputStream outputStream = null;
 		try {
-			outputStream = new ObjectOutputStream (new FileOutputStream("c:\\temp\\animais.dat"));
-			for(Mamifero mani:mamiferos) {
-				outputStream.writeObject(mani);
+			outputStream = new ObjectOutputStream (new FileOutputStream("c:\\temp\\produtos.dat"));
+			for(Produtos prod:produtos) {
+				outputStream.writeObject(prod);
 			}
 		}catch (FileNotFoundException ex) {
 			ex.printStackTrace();
@@ -67,13 +67,15 @@ public class PetStore1 {
 	public void recuperarAnimais() {
 		ObjectInputStream inputStream = null;
 		try {
-			inputStream	= new ObjectInputStream (new FileInputStream ("c:\\temp\\animais.dat"));
+			inputStream	= new ObjectInputStream (new FileInputStream ("c:\\temp\\produtos.dat"));
 			Object obj = null;
 			while((obj = inputStream.readObject ()) != null) {
-				if (obj instanceof Gato)  
-					this.mamiferos.add((Gato)obj);
-				else if (obj instanceof Cao)  
-					this.mamiferos.add((Cao)obj);
+				if (obj instanceof Bebebida)  
+					this.produtos.add((Bebebida)obj);
+				else if (obj instanceof Laticinio)  
+					this.produtos.add((Laticinio)obj);
+				else if (obj instanceof Limpeza)  
+					this.produtos.add((Limpeza)obj);
 			}
 		}catch (EOFException ex) {     // when EOF is reached
 			System.out.println ("End of file reached");
@@ -97,24 +99,24 @@ public class PetStore1 {
 
 
 	public static void main(String[] args) {
-		PetStore1 pet  = new PetStore1();
+		Mercado1 listaMercado  = new Mercado1();
 
-		Gato felix    = new Gato("Felix",    3, "Maria");
-		Gato garfield = new Gato("Garfield", 7, "Maria");
-		Cao  rex      = new Cao ("Rex",  2, "Jose");
-		Cao  toto     = new Cao ("Toto", 5, "Jose");
-		pet.adicionaAnimal(felix);
-		pet.adicionaAnimal(garfield);
-		pet.adicionaAnimal(rex);
-		pet.adicionaAnimal(toto);
-		pet.listarAnimais();
-		pet.gravarAnimais();
-		pet.excluirAnimal(garfield);
-		pet.listarAnimais();
-		pet.excluirAnimais();
-		pet.listarAnimais();
-		pet.recuperarAnimais();
-		pet.listarAnimais();
+		Bebebida coca1L    = new Bebebida (0001,"Coca-Cola 1L","Distribuidora LTDA", "Bebebida");
+		Bebebida pepsi500ml = new Bebebida (0002,"Pepsi 500ml","Distribuidora LTDA", "Bebebida");
+		Laticinio  queijo1      = new Laticinio (0003,"Rex","Coca-Cola 1L","Distribuidora LTDA", "Laticinio");
+		Limpeza  veja500ml     = new Limpeza (0004,"Toto","Coca-Cola 1L","Distribuidora LTDA", "Limpeza");
+		listaMercado.adicionaProduto(coca1L);
+		listaMercado.adicionaProduto(pepsi500ml);
+		listaMercado.adicionaProduto(queijo1);
+		listaMercado.adicionaProduto(veja500ml);
+		listaMercado.listarProdutos();
+		listaMercado.gravarProdutos();
+		listaMercado.excluirProduto(queijo1);
+		listaMercado.listarProdutos();
+		listaMercado.excluirProdutos();
+		listaMercado.listarProdutos();
+		listaMercado.recuperarProdutos();
+		listaMercado.listarProdutos();
 	}
 
 }

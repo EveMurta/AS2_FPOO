@@ -1,28 +1,27 @@
-package PetStore;
+package Produto;
 
 import java.io.Serializable;
 
-public abstract class Mamifero implements Serializable {
+public abstract class Produto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	private   int codigo;
 	private   String nome;
-	private   int idade;
-	private   String dono;
-	protected String especie;
+	private   String fornecedor;
+	private   String categoria;
 	
-	public Mamifero(String nome, int idade, String dono) {
+	public Produto(int codigo, String nome, String fornecedor, String categoria) {
+		this.codigo = codigo;
 		this.nome = nome;
-		this.idade = idade;
-		this.dono = dono;
+		this.fornecedor = fornecedor;
+		this.categoria = categoria;
 	}
 	public String toString() {
 		String retorno = "";
+		retorno += "Codigo: "     + this.codigo     + "\n";
 		retorno += "Nome: "     + this.nome     + "\n";
-		retorno += "Idade: "    + this.idade    + " anos\n";
-		retorno += "Dono: "     + this.dono     + "\n";
-		retorno += "Especie: "  + this.especie  + "\n";
-		retorno += "Barulho: "  + soar()        + "\n";
+		retorno += "Fornecedor: "    + this.fornecedor    + " anos\n";
+		retorno += "Categoria: "     + this.categoria     + "\n";
 		return retorno;
 	}
-	public abstract String soar();
 }
