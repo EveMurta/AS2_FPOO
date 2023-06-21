@@ -53,18 +53,18 @@ public class PetStore {
 
 	private boolean intValido(String s) {
 		try {
-			Integer.parseInt(s); // Método estático, que tenta tranformar uma string em inteiro
+			Integer.parseInt(s); // Mï¿½todo estï¿½tico, que tenta tranformar uma string em inteiro
 			return true;
-		} catch (NumberFormatException e) { // Não conseguiu tranformar em inteiro e gera erro
+		} catch (NumberFormatException e) { // Nï¿½o conseguiu tranformar em inteiro e gera erro
 			return false;
 		}
 	}
 	public int retornaInteiro(String entrada) { // retorna um valor inteiro
 		int numInt;
 
-		//Enquanto não for possível converter o valor de entrada para inteiro, permanece no loop
+		//Enquanto nï¿½o for possï¿½vel converter o valor de entrada para inteiro, permanece no loop
 		while (!this.intValido(entrada)) {
-			entrada = JOptionPane.showInputDialog(null, "Valor incorreto!\n\nDigite um número inteiro.");
+			entrada = JOptionPane.showInputDialog(null, "Valor incorreto!\n\nDigite um nï¿½mero inteiro.");
 		}
 		return Integer.parseInt(entrada);
 	}
@@ -77,7 +77,7 @@ public class PetStore {
 			for (int i=0; i < mamiferos.size(); i++)
 				outputStream.writeObject(mamiferos.get(i));
 		} catch (FileNotFoundException ex) {
-			JOptionPane.showMessageDialog(null,"Impossível criar arquivo!");
+			JOptionPane.showMessageDialog(null,"Impossï¿½vel criar arquivo!");
 			ex.printStackTrace();
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -113,7 +113,7 @@ public class PetStore {
 		} catch (ClassNotFoundException ex) {
 			ex.printStackTrace();
 		} catch (FileNotFoundException ex) {
-			JOptionPane.showMessageDialog(null,"Arquivo com mamíferos NÃO existe!");
+			JOptionPane.showMessageDialog(null,"Arquivo com mamï¿½feros Nï¿½O existe!");
 			ex.printStackTrace();
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -137,21 +137,21 @@ public class PetStore {
 
 		do {
 			menu = "Controle PetStore\n" +
-					"Opções:\n" + 
-					"1. Entrar Mamíferos\n" +
-					"2. Exibir Mamíferos\n" +
-					"3. Limpar Mamíferos\n" +
-					"4. Gravar Mamíferos\n" +
-					"5. Recuperar Mamíferos\n" +
+					"Opï¿½ï¿½es:\n" + 
+					"1. Entrar Mamï¿½feros\n" +
+					"2. Exibir Mamï¿½feros\n" +
+					"3. Limpar Mamï¿½feros\n" +
+					"4. Gravar Mamï¿½feros\n" +
+					"5. Recuperar Mamï¿½feros\n" +
 					"9. Sair";
 			entrada = JOptionPane.showInputDialog (menu + "\n\n");
 			opc1 = this.retornaInteiro(entrada);
 
 			switch (opc1) {
 			case 1:// Entrar dados
-				menu = "Entrada de Animais Mamíferos\n" +
-						"Opções:\n" + 
-						"1. Cão\n" +
+				menu = "Entrada de Animais Mamï¿½feros\n" +
+						"Opï¿½ï¿½es:\n" + 
+						"1. Cï¿½o\n" +
 						"2. Gato\n";
 
 				entrada = JOptionPane.showInputDialog (menu + "\n\n");
@@ -163,13 +163,13 @@ public class PetStore {
 				case 2: mamiferos.add((Mamifero)leGato());
 				break;
 				default: 
-					JOptionPane.showMessageDialog(null,"Animal mamífero para entrada NÃO escolhido!");
+					JOptionPane.showMessageDialog(null,"Animal mamï¿½fero para entrada Nï¿½O escolhido!");
 				}
 
 				break;
 			case 2: // Exibir dados
 				if (mamiferos.size() == 0) {
-					JOptionPane.showMessageDialog(null,"Entre com animais mamíferos primeiramente");
+					JOptionPane.showMessageDialog(null,"Entre com animais mamï¿½feros primeiramente");
 					break;
 				}
 				String dados = "";
@@ -180,7 +180,7 @@ public class PetStore {
 				break;
 			case 3: // Limpar Dados
 				if (mamiferos.size() == 0) {
-					JOptionPane.showMessageDialog(null,"Entre com animais mamíferos primeiramente");
+					JOptionPane.showMessageDialog(null,"Entre com animais mamï¿½feros primeiramente");
 					break;
 				}
 				mamiferos.clear();
@@ -188,7 +188,7 @@ public class PetStore {
 				break;
 			case 4: // Grava Dados
 				if (mamiferos.size() == 0) {
-					JOptionPane.showMessageDialog(null,"Entre com animais mamíferos primeiramente");
+					JOptionPane.showMessageDialog(null,"Entre com animais mamï¿½feros primeiramente");
 					break;
 				}
 				salvaMamiferos(mamiferos);
