@@ -12,22 +12,25 @@ import java.util.ArrayList;
 public class Mercado1 {
 
 	private ArrayList<Produtos> produtos;
-
-
+	
+	
 	public Mercado1() {
 		this.produtos = new ArrayList<Produtos>();
 	}
-
-	public void adicionaAnimal(Produto prod) {
+	
+	
+	public void adicionaProduto(Produto prod) {
 		this.produtos.add(prod);
 	}
-
+	
+	
 	public void listarProdutos() {
 		for(Produto prod:produtos) {
 			System.out.println(prod.toString());
 		}
-		System.out.println("Total = " + this.mamiferos.size() + " animais listados com sucesso!\n");
+		System.out.println("Total = " + this.produtos.size() + " produtos listados com sucesso!\n");
 	}
+	
 	
 	public void excluirProdutos(Produto prod) {
 		if (this.produtos.contains(prod)) {
@@ -38,10 +41,13 @@ public class Mercado1 {
 			System.out.println("Produto inexistente!\n");
 	}
 
+	
 	public void excluirProdutos() {
 		produtos.clear();
 		System.out.println("Produtos excluidos com sucesso!\n");
 	}
+	
+	
 	public void gravarProdutos()  {
 		ObjectOutputStream outputStream = null;
 		try {
@@ -64,7 +70,9 @@ public class Mercado1 {
 			}
 		}
 	}
-	public void recuperarAnimais() {
+	
+	
+	public void recuperarProdutos() {
 		ObjectInputStream inputStream = null;
 		try {
 			inputStream	= new ObjectInputStream (new FileInputStream ("c:\\temp\\produtos.dat"));
@@ -77,8 +85,8 @@ public class Mercado1 {
 				else if (obj instanceof Limpeza)  
 					this.produtos.add((Limpeza)obj);
 			}
-		}catch (EOFException ex) {     // when EOF is reached
-			System.out.println ("End of file reached");
+		}catch (EOFException ex) {     // quando o EOF é alcançado
+			System.out.println ("Final do arquivo atingido.");
 		}catch (ClassNotFoundException ex) {
 			ex.printStackTrace();
 		}catch (FileNotFoundException ex) {
@@ -89,7 +97,7 @@ public class Mercado1 {
 			try {
 				if (inputStream != null ) {
 					inputStream.close();
-					System.out.println("Animais recuperados com sucesso!\n");
+					System.out.println("Produtos recuperados com sucesso!\n");
 				}
 			}catch (IOException ex) {
 				ex.printStackTrace();
