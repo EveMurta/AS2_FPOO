@@ -10,17 +10,20 @@ public abstract class Produto implements Serializable {
 	private   String fornecedor;
 	private   String categoria;
 	
+	
 	public Produto(int codigo, String nome, String fornecedor, String categoria) {
 		this.codigo = codigo;
 		this.nome = nome;
 		this.fornecedor = fornecedor;
 		this.categoria = categoria;
 	}
+	
+	
 	public String toString() {
 		String retorno = "";
 		retorno += "Codigo: "     + this.codigo     + "\n";
 		retorno += "Nome: "     + this.nome     + "\n";
-		retorno += "Fornecedor: "    + this.fornecedor    + " anos\n";
+		retorno += "Fornecedor: "    + this.fornecedor    + "\n";
 		retorno += "Categoria: "     + this.categoria     + "\n";
 		return retorno;
 	}
