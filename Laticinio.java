@@ -6,6 +6,6 @@ public class Laticinio extends Produto {
 
 	public Laticinio(int codigo, String nome, String fornecedor) {
 		super(codigo, nome, fornecedor);
-		this.especie = "Laticinio";
+		this.categoria = "Laticinio";
 	}
 }

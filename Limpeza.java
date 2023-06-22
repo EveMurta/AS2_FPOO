@@ -6,6 +6,6 @@ public class Limpeza extends Produto {
 
 	public Limpeza(int codigo, String nome, String fornecedor) {
 		super(codigo, nome, fornecedor);
-		this.especie = "Limpeza";
+		this.categoria = "Limpeza";
 	}
 }

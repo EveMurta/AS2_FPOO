@@ -6,6 +6,6 @@ public class Bebida extends Produto {
 
 	public Bebida(int codigo, String nome, String fornecedor) {
 		super(codigo, nome, fornecedor);
-		this.especie = "Bebida";
+		this.categoria = "Bebida";
 	}
 }
