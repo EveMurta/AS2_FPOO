@@ -1,4 +1,4 @@
-package Produto;
+package Mercado;
 
 import java.io.EOFException;
 import java.io.FileInputStream;
@@ -12,11 +12,11 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 
-public class PetStore {
-	private ArrayList<Mamifero> mamiferos;
+public class Mercado {
+	private ArrayList<Produto> produtos;
 
-	public PetStore() {
-		this.mamiferos = new ArrayList<Mamifero>();
+	public Mercado() {
+		this.produtos = new ArrayList<Produto>();
 	}
 	public String[] leValores (String [] dadosIn){
 		String [] dadosOut = new String [dadosIn.length];
@@ -27,28 +27,40 @@ public class PetStore {
 		return dadosOut;
 	}
 
-	public Gato leGato (){
+	public Laticinio leLaticinio (){
 
 		String [] valores = new String [3];
-		String [] nomeVal = {"Nome", "Idade", "Dono"};
+		String [] nomeVal = {"Codigo", "Nome", "Fornecedor"};
 		valores = leValores (nomeVal);
 
-		int idade = this.retornaInteiro(valores[1]);
+		int codigo = this.retornaInteiro(valores[0]);
 
-		Gato gato = new Gato (valores[0],idade,valores[2]);
-		return gato;
+		Laticinio laticinio = new Laticinio (codigo,valores[1],valores[2]);
+		return laticinio;
 	}
 
-	public Cao leCao (){
+	public Bebida leBebida (){
 
 		String [] valores = new String [3];
-		String [] nomeVal = {"Nome", "Idade", "Dono"};
+		String [] nomeVal = {"Codigo", "Nome", "Fornecedor"};
 		valores = leValores (nomeVal);
 
-		int idade = this.retornaInteiro(valores[1]);
+		int codigo = this.retornaInteiro(valores[0]);
 
-		Cao cao = new Cao (valores[0],idade,valores[2]);
-		return cao;
+		Bebida bebida = new Bebida (codigo,valores[1],valores[2]);
+		return bebida;
+	}
+
+	public Limpeza leLimpeza (){
+
+		String [] valores = new String [3];
+		String [] nomeVal = {"Codigo", "Nome", "Fornecedor"};
+		valores = leValores (nomeVal);
+
+		int codigo = this.retornaInteiro(valores[0]);
+
+		Limpeza limpeza = new Limpeza (codigo,valores[1],valores[2]);
+		return limpeza;
 	}
 
 	private boolean intValido(String s) {
@@ -64,20 +76,20 @@ public class PetStore {
 
 		//Enquanto n�o for poss�vel converter o valor de entrada para inteiro, permanece no loop
 		while (!this.intValido(entrada)) {
-			entrada = JOptionPane.showInputDialog(null, "Valor incorreto!\n\nDigite um n�mero inteiro.");
+			entrada = JOptionPane.showInputDialog(null, "Valor incorreto!\n\nDigite um número inteiro.");
 		}
 		return Integer.parseInt(entrada);
 	}
 
-	public void salvaMamiferos (ArrayList<Mamifero> mamiferos){
+	public void salvaProdutos (ArrayList<Produto> produtos){
 		ObjectOutputStream outputStream = null;
 		try {
 			outputStream = new ObjectOutputStream 
-					(new FileOutputStream("c:\\temp\\petStore.dados"));
-			for (int i=0; i < mamiferos.size(); i++)
-				outputStream.writeObject(mamiferos.get(i));
+					(new FileOutputStream("c:\\temp\\Mercado.dados"));
+			for (int i=0; i < produtos.size(); i++)
+				outputStream.writeObject(produtos.get(i));
 		} catch (FileNotFoundException ex) {
-			JOptionPane.showMessageDialog(null,"Imposs�vel criar arquivo!");
+			JOptionPane.showMessageDialog(null,"Impossível criar arquivo!");
 			ex.printStackTrace();
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -94,18 +106,18 @@ public class PetStore {
 	}
 
 	@SuppressWarnings("finally")
-	public ArrayList<Mamifero> recuperaMamiferos (){
-		ArrayList<Mamifero> mamiferosTemp = new ArrayList<Mamifero>();
+	public ArrayList<Produto> recuperaProduto(){
+		ArrayList<Produto> produtosTemp = new ArrayList<Produto>();
 
 		ObjectInputStream inputStream = null;
 
 		try {	
 			inputStream = new ObjectInputStream
-					(new FileInputStream("c:\\temp\\petStore.dados"));
+					(new FileInputStream("c:\\temp\\Mercado.dados"));
 			Object obj = null;
 			while ((obj = inputStream.readObject()) != null) {
-				if (obj instanceof Mamifero) {
-					mamiferosTemp.add((Mamifero) obj);
+				if (obj instanceof Produto) {
+					produtosTemp.add((Produto) obj);
 				}   
 			}          
 		} catch (EOFException ex) { // when EOF is reached
@@ -113,7 +125,7 @@ public class PetStore {
 		} catch (ClassNotFoundException ex) {
 			ex.printStackTrace();
 		} catch (FileNotFoundException ex) {
-			JOptionPane.showMessageDialog(null,"Arquivo com mam�feros N�O existe!");
+			JOptionPane.showMessageDialog(null,"Arquivo com produtos NÃO existe!");
 			ex.printStackTrace();
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -125,85 +137,88 @@ public class PetStore {
 			} catch (final IOException ex) {
 				ex.printStackTrace();
 			}
-			return mamiferosTemp;
+			return produtosTemp;
 		}
 	}
 
-	public void menuPetStore (){
+	public void menuMercado (){
 
 		String menu = "";
 		String entrada;
 		int    opc1, opc2;
 
 		do {
-			menu = "Controle PetStore\n" +
-					"Op��es:\n" + 
-					"1. Entrar Mam�feros\n" +
-					"2. Exibir Mam�feros\n" +
-					"3. Limpar Mam�feros\n" +
-					"4. Gravar Mam�feros\n" +
-					"5. Recuperar Mam�feros\n" +
+			menu = "Controle de produtos do Mercado\n" +
+					"Opções:\n" +
+					"1. Entrar Produtos\n" +
+					"2. Exibir Produtos\n" +
+					"3. Limpar Produtos\n" +
+					"4. Gravar Produtos\n" +
+					"5. Recuperar Produtos\n" +
 					"9. Sair";
 			entrada = JOptionPane.showInputDialog (menu + "\n\n");
 			opc1 = this.retornaInteiro(entrada);
 
 			switch (opc1) {
 			case 1:// Entrar dados
-				menu = "Entrada de Animais Mam�feros\n" +
-						"Op��es:\n" + 
-						"1. C�o\n" +
-						"2. Gato\n";
+				menu = "Entrada de Produtos\n" +
+						"Opções:\n" +
+						"1. Bebida\n" +
+						"2. Laticinio\n" +
+						"3. Limpeza\n";
 
 				entrada = JOptionPane.showInputDialog (menu + "\n\n");
 				opc2 = this.retornaInteiro(entrada);
 
 				switch (opc2){
-				case 1: mamiferos.add((Mamifero)leCao());
+				case 1: produtos.add((Produto)leBebida());
 				break;
-				case 2: mamiferos.add((Mamifero)leGato());
+				case 2: produtos.add((Produto)leLaticinio());
+				break;
+				case 3: produtos.add((Produto)leLimpeza());
 				break;
 				default: 
-					JOptionPane.showMessageDialog(null,"Animal mam�fero para entrada N�O escolhido!");
+					JOptionPane.showMessageDialog(null,"Tipo de produto para entrada não escolhido!");
 				}
 
 				break;
 			case 2: // Exibir dados
-				if (mamiferos.size() == 0) {
-					JOptionPane.showMessageDialog(null,"Entre com animais mam�feros primeiramente");
+				if (produtos.size() == 0) {
+					JOptionPane.showMessageDialog(null,"Entre com tipo de produto primeiramente!");
 					break;
 				}
 				String dados = "";
-				for (int i=0; i < mamiferos.size(); i++)	{
-					dados += mamiferos.get(i).toString() + "---------------\n";
+				for (int i=0; i < produtos.size(); i++)	{
+					dados += produtos.get(i).toString() + "---------------\n";
 				}
 				JOptionPane.showMessageDialog(null,dados);
 				break;
 			case 3: // Limpar Dados
-				if (mamiferos.size() == 0) {
-					JOptionPane.showMessageDialog(null,"Entre com animais mam�feros primeiramente");
+				if (produtos.size() == 0) {
+					JOptionPane.showMessageDialog(null,"Entre com tipo de produto primeiramente");
 					break;
 				}
-				mamiferos.clear();
+				produtos.clear();
 				JOptionPane.showMessageDialog(null,"Dados LIMPOS com sucesso!");
 				break;
 			case 4: // Grava Dados
-				if (mamiferos.size() == 0) {
-					JOptionPane.showMessageDialog(null,"Entre com animais mam�feros primeiramente");
+				if (produtos.size() == 0) {
+					JOptionPane.showMessageDialog(null,"Entre com produtos primeiramente");
 					break;
 				}
-				salvaMamiferos(mamiferos);
+				salvaProdutos(produtos);
 				JOptionPane.showMessageDialog(null,"Dados SALVOS com sucesso!");
 				break;
 			case 5: // Recupera Dados
-				mamiferos = recuperaMamiferos();
-				if (mamiferos.size() == 0) {
+				produtos = recuperaProduto();
+				if (produtos.size() == 0) {
 					JOptionPane.showMessageDialog(null,"Sem dados para apresentar.");
 					break;
 				}
 				JOptionPane.showMessageDialog(null,"Dados RECUPERADOS com sucesso!");
 				break;
 			case 9:
-				JOptionPane.showMessageDialog(null,"Fim do aplicativo PETSTORE");
+				JOptionPane.showMessageDialog(null,"Fim do aplicativo MERCADO");
 				break;
 			}
 		} while (opc1 != 9);
@@ -212,8 +227,8 @@ public class PetStore {
 
 	public static void main (String [] args){
 
-		PetStore pet = new PetStore ();
-		pet.menuPetStore();
+		Mercado mercado = new Mercado ();
+		mercado.menuMercado();
 
 	}
 
