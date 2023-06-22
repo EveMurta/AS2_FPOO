@@ -109,10 +109,10 @@ public class Mercado1 {
 	public static void main(String[] args) {
 		Mercado1 listaMercado  = new Mercado1();
 
-		Bebebida coca1L    = new Bebebida (0001,"Coca-Cola 1L","Distribuidora LTDA", "Bebebida");
+		Bebebida coca1L = new Bebebida (0001,"Coca-Cola 1L","Distribuidora LTDA", "Bebebida");
 		Bebebida pepsi500ml = new Bebebida (0002,"Pepsi 500ml","Distribuidora LTDA", "Bebebida");
-		Laticinio  queijo1      = new Laticinio (0003,"Queijo Parma 500g","Distribuidora LTDA", "Laticinio");
-		Limpeza  veja500ml     = new Limpeza (0004,"Veja Desinfetante 500ml","Distribuidora LTDA", "Limpeza");
+		Laticinio queijo1 = new Laticinio (0003,"Queijo Parma 500g","Distribuidora LTDA", "Laticinio");
+		Limpeza veja500ml = new Limpeza (0004,"Veja Desinfetante 500ml","Distribuidora LTDA", "Limpeza");
 		listaMercado.adicionaProduto(coca1L);
 		listaMercado.adicionaProduto(pepsi500ml);
 		listaMercado.adicionaProduto(queijo1);
