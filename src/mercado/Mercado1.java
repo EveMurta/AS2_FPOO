@@ -1,4 +1,4 @@
-package Mercado;
+package mercado;
 
 import java.io.EOFException;
 import java.io.FileInputStream;

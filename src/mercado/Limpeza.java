@@ -1,4 +1,4 @@
-package Mercado;
+package mercado;
 
 public class Limpeza extends Produto {
 

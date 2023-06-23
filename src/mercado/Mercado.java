@@ -1,4 +1,4 @@
-package Mercado;
+package mercado;
 
 import java.io.EOFException;
 import java.io.FileInputStream;
@@ -18,7 +18,8 @@ public class Mercado {
 	public Mercado() {
 		this.produtos = new ArrayList<Produto>();
 	}
-	public String[] leValores (String [] dadosIn){
+	
+	public String[] leValores(String [] dadosIn){
 		String [] dadosOut = new String [dadosIn.length];
 
 		for (int i = 0; i < dadosIn.length; i++)
@@ -26,8 +27,9 @@ public class Mercado {
 
 		return dadosOut;
 	}
-
-	public Laticinio leLaticinio (){
+	
+	
+	public Laticinio leLaticinio() {
 
 		String [] valores = new String [3];
 		String [] nomeVal = {"Codigo", "Nome", "Fornecedor"};
@@ -38,8 +40,9 @@ public class Mercado {
 		Laticinio laticinio = new Laticinio (codigo,valores[1],valores[2]);
 		return laticinio;
 	}
-
-	public Bebida leBebida (){
+	
+	
+	public Bebida leBebida() {
 
 		String [] valores = new String [3];
 		String [] nomeVal = {"Codigo", "Nome", "Fornecedor"};
@@ -47,11 +50,12 @@ public class Mercado {
 
 		int codigo = this.retornaInteiro(valores[0]);
 
-		Bebida bebida = new Bebida (codigo,valores[1],valores[2]);
+		Bebida bebida = new Bebida(codigo,valores[1],valores[2]);
 		return bebida;
 	}
-
-	public Limpeza leLimpeza (){
+	
+	
+	public Limpeza leLimpeza() {
 
 		String [] valores = new String [3];
 		String [] nomeVal = {"Codigo", "Nome", "Fornecedor"};
@@ -62,7 +66,8 @@ public class Mercado {
 		Limpeza limpeza = new Limpeza (codigo,valores[1],valores[2]);
 		return limpeza;
 	}
-
+	
+	
 	private boolean intValido(String s) {
 		try {
 			Integer.parseInt(s); // M�todo est�tico, que tenta tranformar uma string em inteiro
@@ -71,17 +76,23 @@ public class Mercado {
 			return false;
 		}
 	}
+	
+	
+	@SuppressWarnings("unused")
 	public int retornaInteiro(String entrada) { // retorna um valor inteiro
 		int numInt;
 
 		//Enquanto n�o for poss�vel converter o valor de entrada para inteiro, permanece no loop
 		while (!this.intValido(entrada)) {
+			
+			menuMercado();
 			entrada = JOptionPane.showInputDialog(null, "Valor incorreto!\n\nDigite um número inteiro.");
 		}
 		return Integer.parseInt(entrada);
 	}
-
-	public void salvaProdutos (ArrayList<Produto> produtos){
+	
+	
+	public void salvaProdutos(ArrayList<Produto> produtos) {
 		ObjectOutputStream outputStream = null;
 		try {
 			outputStream = new ObjectOutputStream 
@@ -104,9 +115,10 @@ public class Mercado {
 			}
 		}
 	}
-
+	
+	
 	@SuppressWarnings("finally")
-	public ArrayList<Produto> recuperaProduto(){
+	public ArrayList<Produto> recuperaProduto() {
 		ArrayList<Produto> produtosTemp = new ArrayList<Produto>();
 
 		ObjectInputStream inputStream = null;
@@ -140,8 +152,9 @@ public class Mercado {
 			return produtosTemp;
 		}
 	}
-
-	public void menuMercado (){
+	
+	
+	public void menuMercado() {
 
 		String menu = "";
 		String entrada;
@@ -156,7 +169,7 @@ public class Mercado {
 					"4. Gravar Produtos\n" +
 					"5. Recuperar Produtos\n" +
 					"9. Sair";
-			entrada = JOptionPane.showInputDialog (menu + "\n\n");
+			entrada = JOptionPane.showInputDialog(menu + "\n\n");
 			opc1 = this.retornaInteiro(entrada);
 
 			switch (opc1) {
@@ -165,11 +178,11 @@ public class Mercado {
 						"Opções:\n" +
 						"1. Bebida\n" +
 						"2. Laticinio\n" +
-						"3. Limpeza\n";
+						"3. Limpeza\n" +
+						"4. Menu Principal\n";
 
-				entrada = JOptionPane.showInputDialog (menu + "\n\n");
+				entrada = JOptionPane.showInputDialog(menu + "\n\n");
 				opc2 = this.retornaInteiro(entrada);
-
 				switch (opc2){
 				case 1: produtos.add((Produto)leBebida());
 				break;
@@ -177,11 +190,13 @@ public class Mercado {
 				break;
 				case 3: produtos.add((Produto)leLimpeza());
 				break;
+				case 4: menuMercado();
+				break;
 				default: 
 					JOptionPane.showMessageDialog(null,"Tipo de produto para entrada não escolhido!");
 				}
-
 				break;
+				
 			case 2: // Exibir dados
 				if (produtos.size() == 0) {
 					JOptionPane.showMessageDialog(null,"Entre com tipo de produto primeiramente!");
@@ -193,6 +208,7 @@ public class Mercado {
 				}
 				JOptionPane.showMessageDialog(null,dados);
 				break;
+				
 			case 3: // Limpar Dados
 				if (produtos.size() == 0) {
 					JOptionPane.showMessageDialog(null,"Entre com tipo de produto primeiramente");
@@ -201,6 +217,7 @@ public class Mercado {
 				produtos.clear();
 				JOptionPane.showMessageDialog(null,"Dados LIMPOS com sucesso!");
 				break;
+				
 			case 4: // Grava Dados
 				if (produtos.size() == 0) {
 					JOptionPane.showMessageDialog(null,"Entre com produtos primeiramente");
@@ -209,6 +226,7 @@ public class Mercado {
 				salvaProdutos(produtos);
 				JOptionPane.showMessageDialog(null,"Dados SALVOS com sucesso!");
 				break;
+				
 			case 5: // Recupera Dados
 				produtos = recuperaProduto();
 				if (produtos.size() == 0) {
@@ -217,14 +235,15 @@ public class Mercado {
 				}
 				JOptionPane.showMessageDialog(null,"Dados RECUPERADOS com sucesso!");
 				break;
+				
 			case 9:
 				JOptionPane.showMessageDialog(null,"Fim do aplicativo MERCADO");
-				break;
+				System.exit(0);
 			}
 		} while (opc1 != 9);
 	}
-
-
+	
+	
 	public static void main (String [] args){
 
 		Mercado mercado = new Mercado ();
