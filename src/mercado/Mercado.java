@@ -94,9 +94,13 @@ public class Mercado {
 	
 	public void salvaProdutos(ArrayList<Produto> produtos) {
 		ObjectOutputStream outputStream = null;
+		System.getProperty("user.dir");
+		String userDir = System.getProperty("user.dir");
+		String caminhoDir = userDir + "/produtos.dat";
+		
 		try {
 			outputStream = new ObjectOutputStream 
-					(new FileOutputStream("c:\\temp\\Mercado.dados"));
+					(new FileOutputStream(caminhoDir));
 			for (int i=0; i < produtos.size(); i++)
 				outputStream.writeObject(produtos.get(i));
 		} catch (FileNotFoundException ex) {
@@ -122,10 +126,13 @@ public class Mercado {
 		ArrayList<Produto> produtosTemp = new ArrayList<Produto>();
 
 		ObjectInputStream inputStream = null;
+		System.getProperty("user.dir");
+		String userDir = System.getProperty("user.dir");
+		String caminhoDir = userDir + "/produtos.dat";
 
 		try {	
 			inputStream = new ObjectInputStream
-					(new FileInputStream("c:\\temp\\Mercado.dados"));
+					(new FileInputStream(caminhoDir));
 			Object obj = null;
 			while ((obj = inputStream.readObject()) != null) {
 				if (obj instanceof Produto) {

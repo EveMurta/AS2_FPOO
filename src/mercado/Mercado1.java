@@ -17,17 +17,20 @@ public class Mercado1 {
 	public Mercado1() {
 		this.produtos = new ArrayList<Produto>();
 	}
-
+	
+	
 	public void adicionaProduto(Produto prod) {
 		this.produtos.add(prod);
 	}
-
+	
+	
 	public void listarProduto() {
 		for(Produto prod:produtos) {
 			System.out.println(prod.toString());
 		}
 		System.out.println("Total = " + this.produtos.size() + "Produtos listados com sucesso!\n");
 	}
+	
 	
 	public void excluirProduto(Produto prod) {
 		if (this.produtos.contains(prod)) {
@@ -37,15 +40,22 @@ public class Mercado1 {
 		else
 			System.out.println("Produto inexistente!\n");
 	}
-
+	
+	
 	public void excluirProduto() {
 		produtos.clear();
 		System.out.println("Produtos excluidos com sucesso!\n");
 	}
-	public void gravarProduto()  {
+	
+	
+	public void gravarProduto() {
 		ObjectOutputStream outputStream = null;
+		System.getProperty("user.dir");
+		String userDir = System.getProperty("user.dir");
+		String caminhoDir = userDir + "/produtos.dat";
+		
 		try {
-			outputStream = new ObjectOutputStream (new FileOutputStream("c:\\temp\\produtos.dat"));
+			outputStream = new ObjectOutputStream(new FileOutputStream(caminhoDir));
 			for(Produto prod:produtos) {
 				outputStream.writeObject(prod);
 			}
@@ -64,10 +74,16 @@ public class Mercado1 {
 			}
 		}
 	}
+	
+	
 	public void recuperarProduto() {
 		ObjectInputStream inputStream = null;
+		System.getProperty("user.dir");
+		String userDir = System.getProperty("user.dir");
+		String caminhoDir = userDir + "/produtos.dat";
+		
 		try {
-			inputStream	= new ObjectInputStream (new FileInputStream ("c:\\temp\\produtos.dat"));
+			inputStream	= new ObjectInputStream (new FileInputStream (caminhoDir));
 			Object obj = null;
 			while((obj = inputStream.readObject ()) != null) {
 				if (obj instanceof Bebida)
