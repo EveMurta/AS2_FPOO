@@ -17,6 +17,14 @@ public class Mercado {
 
 	public Mercado() {
 		this.produtos = new ArrayList<Produto>();
+		Bebida coca1L = new Bebida (0001,"Coca-Cola 1L","Distribuidora LTDA");
+		produtos.add(coca1L);
+		Bebida pepsi500ml = new Bebida (0002,"Pepsi 500ml","Distribuidora LTDA");
+		produtos.add(pepsi500ml);
+		Laticinio queijo1 = new Laticinio (0003,"Queijo Parma 500g","Distribuidora LTDA");
+		produtos.add(queijo1);
+		Limpeza veja500ml = new Limpeza (0004,"Veja Desinfetante 500ml","Distribuidora LTDA");
+		produtos.add(veja500ml);
 	}
 	
 	public String[] leValores(String [] dadosIn){
@@ -175,6 +183,7 @@ public class Mercado {
 					"3. Limpar Produtos\n" +
 					"4. Gravar Produtos\n" +
 					"5. Recuperar Produtos\n" +
+					"6. Imprimir Listas\n" +
 					"9. Sair";
 			entrada = JOptionPane.showInputDialog(menu + "\n\n");
 			opc1 = this.retornaInteiro(entrada);
@@ -242,6 +251,14 @@ public class Mercado {
 				}
 				JOptionPane.showMessageDialog(null,"Dados RECUPERADOS com sucesso!");
 				break;
+			
+			case 6: // Imprimir Listas
+				if (produtos.size() == 0) {
+					JOptionPane.showMessageDialog(null,"Sem dados para apresentar.");
+					break;
+				}
+				Produto.Imprimir(produtos);
+				break;	
 				
 			case 9:
 				JOptionPane.showMessageDialog(null,"Fim do aplicativo MERCADO");
@@ -250,10 +267,9 @@ public class Mercado {
 		} while (opc1 != 9);
 	}
 	
-	
-	public static void main (String [] args){
+	public static void main(String [] args) {
 
-		Mercado mercado = new Mercado ();
+		Mercado mercado = new Mercado();
 		mercado.menuMercado();
 
 	}
