@@ -8,4 +8,13 @@ public class Laticinio extends Produto {
 		super(codigo, nome, fornecedor);
 		this.categoria = "Laticinio";
 	}
+	
+	@Override
+	public String toString() {
+		String retorno = "";
+		retorno += "Codigo do Laticinio: "     + this.codigo     + "\n";
+		retorno += "Nome do Laticinio: "     + this.nome     + "\n";
+		retorno += "Fornecedor: "    + this.fornecedor    + "\n";
+		return retorno;
+	}
 }

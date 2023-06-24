@@ -8,4 +8,13 @@ public class Limpeza extends Produto {
 		super(codigo, nome, fornecedor);
 		this.categoria = "Limpeza";
 	}
+	
+	@Override
+	public String toString() {
+		String retorno = "";
+		retorno += "Codigo do Produto de Limpeza: "     + this.codigo     + "\n";
+		retorno += "Nome do Produto de Limpeza: "     + this.nome     + "\n";
+		retorno += "Fornecedor: "    + this.fornecedor    + "\n";
+		return retorno;
+	}
 }

@@ -112,27 +112,4 @@ public class Mercado1 {
 			}
 		}
 	}
-
-
-	public static void main(String[] args) {
-		Mercado1 listaMercado  = new Mercado1();
-
-		Bebida coca1L = new Bebida (0001,"Coca-Cola 1L","Distribuidora LTDA");
-		Bebida pepsi500ml = new Bebida (0002,"Pepsi 500ml","Distribuidora LTDA");
-		Laticinio queijo1 = new Laticinio (0003,"Queijo Parma 500g","Distribuidora LTDA");
-		Limpeza veja500ml = new Limpeza (0004,"Veja Desinfetante 500ml","Distribuidora LTDA");
-		listaMercado.adicionaProduto(coca1L);
-		listaMercado.adicionaProduto(pepsi500ml);
-		listaMercado.adicionaProduto(queijo1);
-		listaMercado.adicionaProduto(veja500ml);
-		listaMercado.listarProduto();
-		listaMercado.gravarProduto();
-		listaMercado.excluirProduto(queijo1);
-		listaMercado.listarProduto();
-		listaMercado.excluirProduto();
-		listaMercado.listarProduto();
-		listaMercado.recuperarProduto();
-		listaMercado.listarProduto();
-	}
-
 }
